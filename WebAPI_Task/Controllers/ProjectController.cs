@@ -21,7 +21,7 @@ namespace WebAPI_Task.Controllers
             => await _context.Projects.ToListAsync();
 
         //a method to get an item from the table by id
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         [ProducesResponseType(typeof(Project), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(int id)

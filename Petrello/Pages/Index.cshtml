@@ -1,0 +1,50 @@
+﻿@page
+@using System.Net.Http.Headers
+@using System.Net.Http.Json
+@model IndexModel
+@{
+	HttpClient client = new();
+	client.BaseAddress = new Uri("https://localhost:7060"); //adress to API
+	client.DefaultRequestHeaders.Accept.Clear();
+	client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); //result in json format
+
+	//retrieve data from projects table
+	HttpResponseMessage response1 = await client.GetAsync("api/project");
+	response1.EnsureSuccessStatusCode();
+	var projects = await response1.Content.ReadFromJsonAsync<IEnumerable<DataTransfer.ProjectDto>>();
+
+	//retrieve data from tasks table
+	HttpResponseMessage response2 = await client.GetAsync("api/task");
+	response2.EnsureSuccessStatusCode();
+	var tasks = await response2.Content.ReadFromJsonAsync<IEnumerable<DataTransfer.TaskDto>>();
+
+	ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+
+</div>
+
+<div class="mt-5">
+	@foreach (var project in projects)
+	{
+		<h1 class="display-4">@project.ProjectName</h1>
+		<div class="row g-0">
+			@foreach (var task in tasks)
+			{
+				<div class="card" style="width: 19.1rem; margin: 0.5rem;">
+					<div class="card-body">
+						<h5 class="card-title">Card title</h5>
+						<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+						<a href="#" class="card-link">Card link</a>
+						<a href="#" class="card-link">Another link</a>
+					</div>
+					<div class="card-footer">
+						Card footer
+					</div>
+				</div>
+			}
+		</div>
+	}
+</div>
