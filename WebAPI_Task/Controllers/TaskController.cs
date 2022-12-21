@@ -9,47 +9,47 @@ namespace WebAPI_Task.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProjectController : ControllerBase //managing Http Requests
+    public class TaskController : ControllerBase //managing Http Requests
     {
         //access to the database
         private readonly ProjectDbContext _context;
-        public ProjectController(ProjectDbContext context) => _context = context;
-
-        //a method to get all items from Projects table
+        public TaskController(ProjectDbContext context) => _context = context;
+        
+        //a method to get all items from Tasks table
         [HttpGet]
-        public async Task<IEnumerable<Project>> Get()
-            => await _context.Projects.ToListAsync();
+        public async Task<IEnumerable<Models.Task>> Get()
+            => await _context.Tasks.ToListAsync();
 
         //a method to get an item from the table by id
         [HttpGet("id")]
-        [ProducesResponseType(typeof(Project), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Models.Task), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(int id)
         {
-            var project = await _context.Projects.FindAsync(id);
-            return project == null ? NotFound() : Ok(project);
+            var task = await _context.Tasks.FindAsync(id);
+            return task == null ? NotFound() : Ok(task);
         }
 
         //a method to create a new item in the table
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<IActionResult> Create(Project project)
+        public async Task<IActionResult> Create(Models.Task task)
         {
-            await _context.Projects.AddAsync(project);
+            await _context.Tasks.AddAsync(task);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetById), new { id = project.ProjectId }, project);
+            return CreatedAtAction(nameof(GetById), new { id = task.TaskId }, task);
         }
 
         //a method to edit an existing item in the table by id
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Update(int id, Project project)
+        public async Task<IActionResult> Update(int id, Models.Task task)
         {
-            if (id != project.ProjectId) return BadRequest();
+            if (id != task.TaskId) return BadRequest();
 
-            _context.Entry(project).State = EntityState.Modified;
+            _context.Entry(task).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -61,13 +61,14 @@ namespace WebAPI_Task.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(int id)
         {
-            var projectToDelete = await _context.Projects.FindAsync(id);
-            if (projectToDelete == null) return NotFound();
+            var taskToDelete = await _context.Tasks.FindAsync(id);
+            if (taskToDelete == null) return NotFound();
 
-            _context.Projects.Remove(projectToDelete);
+            _context.Tasks.Remove(taskToDelete);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
+
     }
 }
