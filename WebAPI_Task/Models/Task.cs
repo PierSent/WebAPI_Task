@@ -11,8 +11,8 @@ namespace WebAPI_Task.Models
         [Required]
         public string Description { get; set; } = default!;
         public TaskStatus Status { get; set; }
-        public string Priority { get; set; } = default!;
-        public int ProjectId { get; set; } = default!;
+        public int Priority { get; set; } = default!;
+        public int ProjId { get; set; } = default!;
     }
 
     public enum TaskStatus
