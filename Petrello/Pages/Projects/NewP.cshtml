@@ -1,0 +1,39 @@
+﻿@page
+@using System.Net.Http.Headers
+@using Petrello.DataTransfer;
+@model Petrello.Pages.Projects.NewPModel
+@{
+}
+
+<div class="mt-5">
+	<form method="post">
+		<div class="form-group">
+			<label asp-for="Project.ProjectName" class="form-label">Name of a new project</label>
+			<input asp-for="Project.ProjectName" class="form-control" />
+			<span asp-validation-for="Project.ProjectName" class="text text-danger"></span>
+		</div>
+		<br>
+		<div class="form-group">
+			<label asp-for="Project.Status" class="form-label">Status of a project</label>
+			<select class="form-select"
+					asp-for="Project.Status"
+					asp-items="Html.GetEnumSelectList<ProjectStatus>()"></select>
+
+		</div>
+		<br>
+		<div class="form-group">
+			<label asp-for="Project.StartDate" class="form-label">Project start date</label>
+			<input asp-for="Project.StartDate" class="form-control" type="date" />
+			<span asp-validation-for="Project.StartDate" class="text text-danger"></span>
+		</div>
+		<br>
+		<div class="form-group">
+			<label asp-for="Project.CompletionDate" class="form-label">Project completion date</label>
+			<input asp-for="Project.CompletionDate" class="form-control" type="date" />
+			<span asp-validation-for="Project.CompletionDate" class="text text-danger"></span>
+		</div>
+		<br>
+		<button class="btn btn-outline-primary">Add new Project</button>
+		<a href="../Index" class="btn btn-outline-secondary">Cancel</a>
+	</form>
+</div>

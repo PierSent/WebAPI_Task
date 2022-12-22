@@ -1,0 +1,35 @@
+﻿@page
+@using System.Net.Http.Headers
+@using Petrello.DataTransfer;
+@model Petrello.Pages.Tasks.NewTModel
+@{
+}
+
+<div class="mt-5">
+	<form method="post">
+		<div class="form-group">
+			<label asp-for="Task.TaskName" class="form-label">Name of a new task</label>
+			<input asp-for="Task.TaskName" class="form-control" />
+			<span asp-validation-for="Task.TaskName" class="text text-danger"></span>
+		</div>
+		<br>
+		<div class="form-group">
+			<label asp-for="Task.Description" class="form-label">Description</label>
+			<input asp-for="Task.Description" class="form-control" />
+
+		</div>
+		<br>
+		<div class="form-group">
+			<label asp-for="Task.Status" class="form-label">Status of a project</label>
+			<select class="form-select"
+					asp-for="Task.Status"
+					asp-items="Html.GetEnumSelectList<DataTransfer.TaskStatus>()"></select>
+
+		</div>
+		<br>
+
+		<br>
+		<button class="btn btn-outline-primary">Add new Task</button>
+		<a href="../Index" class="btn btn-outline-secondary">Cancel</a>
+	</form>
+</div>

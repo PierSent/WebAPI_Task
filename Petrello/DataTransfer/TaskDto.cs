@@ -8,7 +8,7 @@ namespace Petrello.DataTransfer
         public string TaskName { get; set; } = default!;
         public string Description { get; set; } = default!;
         public TaskStatus Status { get; set; }
-        public int Priority { get; set; } = default!;
+		public int Priority { get; set; } = default!;
         public int ProjId { get; set; } = default!;
     }
     public enum TaskStatus

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI_Task", "WebAPI_Task\WebAPI_Task.csproj", "{F1F35868-28A9-45C6-BAE2-2746C532DDED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Petrello", "Petrello\Petrello.csproj", "{54E4A9D3-8D19-4487-ADEB-A5E478905B99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Petrello", "Petrello\Petrello.csproj", "{54E4A9D3-8D19-4487-ADEB-A5E478905B99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
