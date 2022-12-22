@@ -30,7 +30,7 @@
 	@foreach (var project in projects)
 	{
 		<h1 class="display-4">@project.ProjectName</h1>
-		<h5 class="text-muted">@project.StartDate.ToString("dd MMMM yyyy") — @project.CompletionDate.ToString("dd MMMM yyyy")</h5>
+		<h5 class="text-muted">@project.StartDate.ToString("dd MMMM yyyy") — @project.CompletionDate.ToString("dd MMMM yyyy") <span class="@project.Status.ToCssClass()">@project.Status</span></h5>
 		<div class="row g-0">
 			@foreach (var task in tasks)
 			{
@@ -55,6 +55,7 @@
 		</div>
 		<p></p>
 		<a asp-page="/Tasks/NewT" asp-route-id="@project.ProjectId" type="button" class="btn btn-outline-secondary">Add new Task</a>
-		<p></p>
+		<hr />
+	
 	}
 </div>

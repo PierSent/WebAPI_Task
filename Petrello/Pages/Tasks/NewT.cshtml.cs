@@ -34,7 +34,7 @@ namespace Petrello.Pages.Tasks
 
 
 			//Project = await response1.Content.FindAsync;
-			//task.ProjId = Project.ProjectId;
+			task.ProjId = Project.ProjectId;
 
 			return RedirectToPage("../Index");
 
