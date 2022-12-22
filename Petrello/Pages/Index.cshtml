@@ -20,8 +20,6 @@
 	var tasks = await response2.Content.ReadFromJsonAsync<IEnumerable<DataTransfer.TaskDto>>();
 
 	ViewData["Title"] = "Home page";
-
-	int tempId;
 }
 
 <div class="text-center">
@@ -41,20 +39,22 @@
 					<div class="card" style="width: 19.1rem; margin: 0.5rem;">
 						<div class="card-body">
 							<h5 class="card-title">@task.TaskName</h5>
+
 							<p class="card-text">@task.Description</p>
 							<span class="@task.Status.ToCssClass()">@task.Status</span>
-
+							<p></p>
+							<p class="text-muted">Priority: @task.Priority</p>
 						</div>
 						<div class="card-footer text-muted">
-							<small>Priority: @task.Priority</small>
+							<a asp-page="/Tasks/EditT" asp-route-id="@task.TaskId" class="link-dark">Edit</a>
+							<a asp-page="/Tasks/DeleteT" asp-route-id="@task.TaskId" class="link-dark">Delete</a>
 						</div>
 					</div>
 				}
 			}
 		</div>
-
-		<a asp-page="/Tasks/NewT" type="button" class="btn btn-outline-secondary">Add new Task @{
-				tempId = project.ProjectId;
-			}</a>
+		<p></p>
+		<a asp-page="/Tasks/NewT" asp-route-id="@project.ProjectId" type="button" class="btn btn-outline-secondary">Add new Task</a>
+		<p></p>
 	}
 </div>

@@ -1,0 +1,14 @@
+﻿@page "{id:int}"
+@model Petrello.Pages.Tasks.DeleteTModel
+@{
+}
+
+<div class="mt-5">
+	<form asp-action="DeleteTask" asp-route-id="{id:int}" method="post">
+		<h2>Are you sure you want to delete this Task?</h2>
+		<br>
+		<button type="submit" class="btn btn-outline-danger">Delete</button>
+		<a href="../../Index" class="btn btn-outline-secondary">Cancel</a>
+	</form>
+</div>
+

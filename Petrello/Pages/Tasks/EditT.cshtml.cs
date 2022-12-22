@@ -1,14 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.CodeAnalysis;
-using Petrello.DataTransfer;
+using static System.Net.Mime.MediaTypeNames;
 using System.Text;
 using System.Text.Json;
-using static System.Net.Mime.MediaTypeNames;
+using Petrello.DataTransfer;
 
 namespace Petrello.Pages.Tasks
 {
-	public class NewTModel : PageModel
+	public class EditTModel : PageModel
 	{
 		public async Task<IActionResult> OnPost(TaskDto task)
 		{
@@ -26,29 +25,13 @@ namespace Petrello.Pages.Tasks
 			using var httpResponseMessage =
 				await client.PostAsync("/api/task", taskJson);
 
-			HttpResponseMessage response1 = await client.GetAsync("api/project");
-			response1.EnsureSuccessStatusCode();
-			var projects = await response1.Content.ReadFromJsonAsync<IEnumerable<DataTransfer.ProjectDto>>();
-
 			httpResponseMessage.EnsureSuccessStatusCode();
-
-
-			//Project = await response1.Content.FindAsync;
-			//task.ProjId = Project.ProjectId;
 
 			return RedirectToPage("../Index");
 
 		}
 
-		public void OnGetNumberId(uint id)
-		{
-
-		}
-
-
-
 		[BindProperty]
 		public TaskDto Task { get; set; }
-		public ProjectDto Project { get; set; }
 	}
 }
