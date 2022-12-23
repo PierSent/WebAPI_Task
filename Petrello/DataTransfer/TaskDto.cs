@@ -15,4 +15,5 @@ namespace Petrello.DataTransfer
     {
         ToDo, InProgress, Done
     }
+
 }

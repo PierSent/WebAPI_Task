@@ -15,7 +15,8 @@
 		<br>
 		<div class="form-group">
 			<label asp-for="Task.Description" class="form-label">Description</label>
-			<input asp-for="Task.Description" class="form-control" />
+			<textarea asp-for="Task.Description" class="form-control"></textarea>
+			<span asp-validation-for="Task.Description" class="text text-danger"></span>
 		</div>
 		<br>
 		<div class="form-group">
@@ -35,7 +36,7 @@
 				</select>
 		</div>
 		<br>
-		<button class="btn btn-outline-primary">Add new Task</button>
+		<button asp-route-task="Task" asp-route-id="Task.ProjId" class="btn btn-outline-primary">Add new Task</button>
 		<a href="../../Index" class="btn btn-outline-secondary">Cancel</a>
 	</form>
 </div>
