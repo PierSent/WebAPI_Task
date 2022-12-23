@@ -1,22 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Petrello.DataTransfer;
 using static System.Net.Mime.MediaTypeNames;
 using System.Text;
 using System.Text.Json;
-using Petrello.DataTransfer;
 
-namespace Petrello.Pages.Tasks
+namespace Petrello.Pages.Projects
 {
-	public class EditTModel : PageModel
+	public class EditPModel : PageModel
 	{
-		public async Task<IActionResult> OnPost(TaskDto task, int id)
+		public async Task<IActionResult> OnPost(int id, ProjectDto project)
 		{
 			if (!ModelState.IsValid) return Page(); //validation of the form
 
-			task.TaskId= id;
+			project.ProjectId = id;
 
-			var taskJson = new StringContent(
-				JsonSerializer.Serialize(task),
+			var projectJson = new StringContent(
+				JsonSerializer.Serialize(project),
 				Encoding.UTF8,
 				Application.Json);
 
@@ -24,7 +24,7 @@ namespace Petrello.Pages.Tasks
 			client.BaseAddress = new Uri("https://localhost:7060"); //adress to API
 
 			using var httpResponseMessage =
-				await client.PutAsync($"/api/task/{task.TaskId}", taskJson);
+				await client.PutAsync($"/api/project/{id}", projectJson);
 
 			httpResponseMessage.EnsureSuccessStatusCode();
 
@@ -33,6 +33,6 @@ namespace Petrello.Pages.Tasks
 		}
 
 		[BindProperty]
-		public TaskDto Task { get; set; }
+		public ProjectDto Project { get; set; }
 	}
 }

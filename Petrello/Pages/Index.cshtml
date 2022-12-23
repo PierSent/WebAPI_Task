@@ -32,11 +32,11 @@
 		<h1 class="display-4">@project.ProjectName</h1>
 		<h5 style="margin-bottom: 1em" class="text-muted">
 			@project.StartDate.ToString("dd MMMM yyyy") — @project.CompletionDate.ToString("dd MMMM yyyy")
-			<span class="@project.Status.ToCssClass()">
+			<span style="margin-left: 1em" class="@project.Status.ToCssClass()">
 				@project.Status
 			</span>
-			<a style="margin-left: 1em; margin-right: 1em" asp-page="/Tasks/EditP" asp-route-id="@project.ProjectId" class="link-dark">Edit project ✎</a>
-			<a asp-page="/Tasks/DeleteP" asp-route-id="@project.ProjectId" class="link-dark">Delete project ✘</a>
+			<a style="margin-left: 1em; margin-right: 1em" asp-page="/Projects/EditP" asp-route-id="@project.ProjectId" class="link-dark">Edit project ✎</a>
+			<a asp-page="/Projects/DeleteP" asp-route-id="@project.ProjectId" class="link-dark">Delete project 🗑</a>
 		</h5>
 		<div class="row g-0">
 			@foreach (var task in tasks)
@@ -52,8 +52,8 @@
 							<p class="text-muted">Priority: @task.Priority</p>
 						</div>
 						<div class="card-footer text-muted">
-							<a asp-page="/Tasks/EditT" asp-route-id="@task.TaskId" class="link-dark">Edit</a>
-							<a style="margin-left: 1em" asp-page="/Tasks/DeleteT" asp-route-id="@task.TaskId" class="link-dark">Delete</a>
+							<a asp-page="/Tasks/EditT" asp-route-id="@task.TaskId" class="link-dark">@*Edit*@</a>
+							<a asp-page="/Tasks/DeleteT" asp-route-id="@task.TaskId" class="link-dark">Delete</a>
 						</div>
 					</div>
 				}
@@ -61,7 +61,7 @@
 		</div>
 		<p></p>
 		<a style="margin-left: 0.5em" asp-page="/Tasks/NewT" asp-route-id="@project.ProjectId" type="button" class="btn btn-outline-secondary">Add new Task</a>
-		<hr style="margin-bottom: 4em; margin-top: 4em"/>
+		<hr style="margin-bottom: 4em; margin-top: 4em" />
 
 	}
 </div>

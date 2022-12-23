@@ -1,11 +1,13 @@
 ﻿@page "{id:int}"
+@using System.Net.Http.Headers
+@using Petrello.DataTransfer;
 @model Petrello.Pages.Tasks.EditTModel
 @{
 }
 
 <div class="mt-5">
+	<h2 style="margin-bottom: 1em">Editing the Task...</h2>
 	<form method="post">
-		<input type="hidden" name="id" value="task.TaskId" />
 		<div class="form-group">
 			<label asp-for="Task.TaskName" class="form-label">Name of a new task</label>
 			<input asp-for="Task.TaskName" class="form-control" />
@@ -14,8 +16,8 @@
 		<br>
 		<div class="form-group">
 			<label asp-for="Task.Description" class="form-label">Description</label>
-			<input asp-for="Task.Description" class="form-control" />
-
+			<textarea asp-for="Task.Description" class="form-control"></textarea>
+			<span asp-validation-for="Task.Description" class="text text-danger"></span>
 		</div>
 		<br>
 		<div class="form-group">
@@ -23,12 +25,19 @@
 			<select class="form-select"
 					asp-for="Task.Status"
 					asp-items="Html.GetEnumSelectList<DataTransfer.TaskStatus>()"></select>
-
 		</div>
 		<br>
-
+		<div class="form-group">
+			<label asp-for="Task.Priority" class="form-label">Priority of a project</label>
+			<select class="form-select"
+					asp-for="Task.Priority">
+				<option value="1">1 - High priority</option>
+				<option value="2">2 - Mid priority</option>
+				<option value="3">3 - Low priority</option>
+			</select>
+		</div>
 		<br>
-		<button class="btn btn-outline-primary">Edit the task</button>
+		<button asp-route-task="Task" asp-route-id="Task.ProjId" class="btn btn-outline-primary">Edit</button>
 		<a href="../../Index" class="btn btn-outline-secondary">Cancel</a>
 	</form>
 </div>
